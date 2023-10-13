@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model SequelizeMeta {
+  name String @id @db.VarChar(255)
+}
+
+model tb_alergias {
+  id              Int        @id @default(autoincrement())
+  tb_alergia_desc String?    @db.VarChar(255)
+  tb_pacientes    Paciente[]
+}
+
+model Cuidador {
+  id               Int                @id @default(autoincrement())
+  cpf              String             @map("tb_cuidador_cpf") @db.Char(11)
+  dtNascimento     Int           @map("tb_cuidador_dt_nasc")
+  email            String             @unique @map("tb_cuidador_email") @db.VarChar(255)
+  telefone         Int                @unique @map("tb_cuidadr_tel")
+  telefoneReserva  Int?               @unique @map("tb_cuidador_tel_res")
+  nomeSocial       String?            @map("tb_cuidador_nome_social") @db.VarChar(255)
+  nome             String             @map("tb_cuidador_nome") @db.VarChar(255)
+  senha            String             @map("tb_cuidador_senha") @db.VarChar(255)
+  fotoPerfil       Bytes?              @map("tb_cuidador_foto_perfil")
+  rua              String             @map("tb_cuidador_rua") @db.VarChar(255)
+  cep              String             @map("tb_cuidador_cep") @db.Char(8)
+  bairro           String             @map("tb_cuidador_bairro") @db.VarChar(255)
+  numeroCasa       Int                @map("tb_cuidador_numero_casa")
+  cidade           String             @map("tb_cuidador_cidade") @db.VarChar(255)
+  uf               String             @map("tb_cuidador_uf") @db.Char(2)
+  complementoCasa  String?            @map("tb_cuidador_complemento") @db.VarChar(255)
+  pontoReferencia  String?            @map("tb_cuidador_ponto_referencia") @db.VarChar(255)
+  nivel            Nivel?
+  tb_pacientes     Paciente[]
+  tb_pulseira_scan tb_pulseira_scan[]
+
+  @@map("tb_cuidadores")
+}
+
+model Paciente {
+  id                      Int                @id @default(autoincrement())
+  cpf                     String             @map("tb_paciente_cpf") @db.Char(11)
+  nome                    String             @map("tb_paciente_nome") @db.VarChar(255)
+  dtNascimento            DateTime           @map("tb_paciente_dt_nasc") @db.Timestamptz(6)
+  condicao                String             @map("tb_paciente_condicao") @db.VarChar(255)
+  responsavelLegal        String             @map("tb_paciente_responsavel_legal") @db.VarChar(255)
+  tipoSanguineo           TipoSanguineo
+  temperamento            String             @map("tb_paciente_temperamento") @db.VarChar(255)
+  interacao               String             @map("tb_paciente_interacao") @db.VarChar(255)
+  fotoPerfil              Bytes              @map("tb_paciente_foto")
+  tb_paciente_fk_cuidador Int
+  tb_paciente_fk_remedio  Int?
+  tb_paciente_fk_alergia  Int?
+  tb_alergias             tb_alergias?       @relation(fields: [tb_paciente_fk_alergia], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_cuidadores           Cuidador           @relation(fields: [tb_paciente_fk_cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_remedios             tb_remedios?       @relation(fields: [tb_paciente_fk_remedio], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_pulseira_scan        tb_pulseira_scan[]
+
+  @@map("tb_pacientes")
+}
+
+model tb_pulseira_scan {
+  id                           Int      @id @default(autoincrement())
+  tb_pulseira_scan_fk_cuidador Int
+  tb_pulseira_scan_fk_paciente Int
+  tb_pulseira_scan_local       String?  @db.VarChar(255)
+  tb_cuidadores                Cuidador @relation(fields: [tb_pulseira_scan_fk_cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_pacientes                 Paciente @relation(fields: [tb_pulseira_scan_fk_paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model tb_remedios {
+  id              Int        @id @default(autoincrement())
+  tb_remedio_desc String     @db.VarChar(255)
+  tb_remedio_qtd  String     @db.VarChar(255)
+  tb_remedio_hora DateTime   @db.Time(6)
+  tb_pacientes    Paciente[]
+}
+
+enum Nivel {
+  principal
+  secundario
+}
+
+enum TipoSanguineo {
+  A_POSITIVO
+  B_POSITIVO
+  AB_POSITIVO
+  O_POSITIVO
+  A_NEGATIVO
+  B_NEGATIVO
+  AB_NEGATIVO
+  O_NEGATIVO
+}
