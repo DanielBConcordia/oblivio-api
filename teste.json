@@ -1,7 +1,19 @@
 {
-    "cpf": "",
-    "dtNascimento": "",
-    "email": "",
-    "telefone": "",
-    "telefoneReserva": ""
-}
+    "    cpf        ": "98765432155",    
+    "dtNascimento   ": 19062006,
+    "email          ": "teste2@gmail.com",
+    "telefone       ": 11987654321,
+    "telefoneReserva": 11654987321,
+    "nomeSocial     ": "DANDAN",
+    "nome           ": "Daniel",
+    "senha          ": "123465A",
+    "fotoPerfil     ": "",
+    "rua            ": "Domingues",
+    "cep            ": "06550000",
+    "bairro         ": "Parque Payol 2",
+    "numeroCasa     ": 1,
+    "cidade         ": "Pirapora",
+    "uf             ": "SP",
+    "complementoCasa": "A",
+    "pontoReferencia": ""
+    }
