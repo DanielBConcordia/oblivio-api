@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
-    "vercel-build": "yarn prisma migrate deploy"
+    "vercel-build": "yarn prisma generate"
   },
   "devDependencies": {
     "@types/express": "^4.17.19",
