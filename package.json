@@ -8,6 +8,7 @@
     "vercel-build": "yarn prisma generate"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.14",
     "@types/express": "^4.17.19",
     "prisma": "^5.4.2",
     "ts-node-dev": "^2.0.0",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.4.2",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1"
   }

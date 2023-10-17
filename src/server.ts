@@ -2,9 +2,19 @@ import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
 import { routes } from "./routes";
 import { AppError } from "./errors/appError";
+import cors from 'cors';
+
 
 const app = express();
 
+
+const allowedOrigins = ["*"];
+
+const options: cors.CorsOptions = {
+    origin: allowedOrigins
+}
+
+app.use(cors(options));
 app.use(express.json());
 
 app.use(routes);
