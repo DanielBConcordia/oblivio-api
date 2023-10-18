@@ -10,11 +10,14 @@ const app = express();
 
 
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+var corsOptions = {
+    origin: 'http://localhost:19006/',
+    credentials: true,
+    optionsSuccessStatus: 200
+}
 
+app.options('*', cors())
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(routes);
