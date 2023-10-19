@@ -2,7 +2,7 @@ import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
 import { routes } from "./routes";
 import { AppError } from "./errors/appError";
-import cors from 'cors';
+const cors = require('cors');
 
 
 const app = express();
@@ -16,7 +16,6 @@ var corsOptions = {
     optionsSuccessStatus: 200
 }
 
-app.options('*', cors())
 app.use(cors(corsOptions));
 app.use(express.json());
 
