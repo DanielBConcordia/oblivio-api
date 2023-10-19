@@ -2,12 +2,12 @@ import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
 import { routes } from "./routes";
 import { AppError } from "./errors/appError";
-const cors = require('cors');
+import cors from 'cors';
 
 
 const app = express();
 
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 
 app.use(routes);
