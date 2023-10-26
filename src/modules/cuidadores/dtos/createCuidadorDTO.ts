@@ -1,9 +1,9 @@
 export interface CreateCuidadorDTO {
     cpf: string;
-    dtNascimento: number;
+    dtNascimento: string;
     email: string;
-    telefone: number;
-    telefoneReserva: number;
+    telefone: string;
+    telefoneReserva: string;
     nomeSocial: string;
     nome: string;
     senha: string;
@@ -11,7 +11,7 @@ export interface CreateCuidadorDTO {
     rua: string;
     cep: string;
     bairro: string;
-    numeroCasa: number;
+    numeroCasa: string;
     cidade: string;
     uf: string;
     complementoCasa: string;
