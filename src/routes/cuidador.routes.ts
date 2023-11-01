@@ -21,7 +21,7 @@ cuidadorRoutes.post("/cad", createUserController.handle, (req: Request, res: Res
 // Listagem de cuidadores
 cuidadorRoutes.get("/list", getCuidador.handle);
 
-//Login de cuidador
+//Login cuidador
 cuidadorRoutes.post("/login", loginCuidador.handle, (req: Request, res: Response) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
