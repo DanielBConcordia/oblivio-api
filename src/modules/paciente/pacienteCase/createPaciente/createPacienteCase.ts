@@ -1,7 +1,7 @@
 import { Paciente } from "@prisma/client";
-import { prisma } from "../../../prisma/client";
-import { CreatePacienteDTO } from "../../cuidadores/dtos/createPacienteDTO";
-import { AppError } from "../../../errors/appError";
+import { prisma } from "../../../../prisma/client";
+import { CreatePacienteDTO } from "../../dtos/createPacienteDTO";
+import { AppError } from "../../../../errors/appError";
 
 export class CreatePacienteCase {
   async execute({

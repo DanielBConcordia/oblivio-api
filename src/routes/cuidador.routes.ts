@@ -5,12 +5,12 @@ import { LoginCuidadorController } from "../modules/cuidadores/cuidadorCases/log
 import { Request, Response } from "express";
 const cuidadorRoutes = Router();
 
-const createUserController = new CreateCuidadorController();
+const createCuidador = new CreateCuidadorController();
 const getCuidador = new GetCuidadorController();
 const loginCuidador = new LoginCuidadorController();
 
 // Cadastro de cuidador
-cuidadorRoutes.post("/cad", createUserController.handle, (req: Request, res: Response) => {
+cuidadorRoutes.post("/cad", createCuidador.handle, (req: Request, res: Response) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Max-Age", "1800");
