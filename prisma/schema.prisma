@@ -48,7 +48,7 @@ model Paciente {
   id                      Int                @id @default(autoincrement())
   cpf                     String             @map("tb_paciente_cpf") @db.Char(11)
   nome                    String             @map("tb_paciente_nome") @db.VarChar(255)
-  dtNascimento            DateTime           @map("tb_paciente_dt_nasc") @db.Timestamptz(6)
+  dtNascimento            String             @map("tb_paciente_dt_nasc") @db.Char(8)
   condicao                String             @map("tb_paciente_condicao") @db.VarChar(255)
   responsavelLegal        String             @map("tb_paciente_responsavel_legal") @db.VarChar(255)
   tipoSanguineo           TipoSanguineo
