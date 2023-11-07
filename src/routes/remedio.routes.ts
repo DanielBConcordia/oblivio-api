@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { CreateRemedioController } from "../modules/remedios/remediosCases/createRemedio/createRemedioController";
+import { CreateRemedioController } from "../modules/remedios/remedioCases/createRemedio/createRemedioController";
+import { GetRemedioController } from "../modules/remedios/remedioCases/getRemedio/getRemedioController";
 import { Request, Response } from "express";
 const remediosRoutes = Router();
 
 const createRemedioController = new CreateRemedioController();
+const getRemedioController = new GetRemedioController();
 
 // Cadastro Remedio 
 remediosRoutes.post("/cad", createRemedioController.handle, (req: Request, res: Response) => {
@@ -13,5 +15,8 @@ remediosRoutes.post("/cad", createRemedioController.handle, (req: Request, res: 
     res.setHeader("Access-Control-Allow-Headers", "content-type");
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
 })
+
+// Listar remedios
+remediosRoutes.get("/list", getRemedioController.handle)
 
 export { remediosRoutes }

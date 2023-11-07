@@ -9,6 +9,6 @@ export class GetPacienteCase {
             }
         });
 
-        return pacientes
+        return pacientes    
     }
 }
