@@ -8,6 +8,6 @@ export interface CreatePacienteDTO {
   temperamento: string;
   interacao: string;
   fotoPerfil: Buffer;
-  tb_paciente_fk_cuidador: number;
+  cuidador: number;
 }
 

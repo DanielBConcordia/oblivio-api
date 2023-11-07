@@ -13,21 +13,23 @@ export class CreatePacienteController {
       temperamento,
       interacao,
       fotoPerfil,
-      tb_paciente_fk_cuidador,
+      cuidador
     } = req.body;
 
     const createPacienteCase = new CreatePacienteCase();
 
-    const result = await createPacienteCase.execute({ cpf,
-        nome,
-        dtNascimento,
-        condicao,
-        responsavelLegal,
-        tipoSanguineo,
-        temperamento,
-        interacao,
-        fotoPerfil,
-        tb_paciente_fk_cuidador });
+    const result = await createPacienteCase.execute({
+      cpf,
+      nome,
+      dtNascimento,
+      condicao,
+      responsavelLegal,
+      tipoSanguineo,
+      temperamento,
+      interacao,
+      fotoPerfil,
+      cuidador
+    });
 
     return res.status(201).json(result)
   }

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { CreateCuidadorController } from "../modules/cuidadores/cuidadorCases/createCuidador/createCuidadorController";
-import { GetCuidadorController } from "../modules/cuidadores/cuidadorCases/getCuidadorCase/getCuidadorController";
-import { LoginCuidadorController } from "../modules/cuidadores/cuidadorCases/loginCuidadorCase/loginCuidadorController";
+import { CreateCuidadorController } from "../modules/cuidador/cuidadorCases/createCuidador/createCuidadorController";
+import { GetCuidadorController } from "../modules/cuidador/cuidadorCases/getCuidadorCase/getCuidadorController";
+import { LoginCuidadorController } from "../modules/cuidador/cuidadorCases/loginCuidadorCase/loginCuidadorController";
 import { Request, Response } from "express";
 const cuidadorRoutes = Router();
 
