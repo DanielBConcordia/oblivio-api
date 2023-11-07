@@ -14,7 +14,7 @@ export class CreatePacienteCase {
     temperamento,
     interacao,
     fotoPerfil,
-    tb_paciente_fk_cuidador
+    cuidador
   }: CreatePacienteDTO): Promise<Paciente> {
     // Verificar se o paciente já existe
 
@@ -40,7 +40,7 @@ export class CreatePacienteCase {
         temperamento,
         interacao,
         fotoPerfil,
-        tb_paciente_fk_cuidador
+        cuidador
       },
     });
 

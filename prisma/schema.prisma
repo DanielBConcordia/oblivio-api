@@ -45,23 +45,23 @@ model Cuidador {
 }
 
 model Paciente {
-  id                      Int                @id @default(autoincrement())
-  cpf                     String             @map("tb_paciente_cpf") @db.Char(11)
-  nome                    String             @map("tb_paciente_nome") @db.VarChar(255)
-  dtNascimento            String             @map("tb_paciente_dt_nasc") @db.Char(8)
-  condicao                String             @map("tb_paciente_condicao") @db.VarChar(255)
-  responsavelLegal        String             @map("tb_paciente_responsavel_legal") @db.VarChar(255)
-  tipoSanguineo           TipoSanguineo
-  temperamento            String             @map("tb_paciente_temperamento") @db.VarChar(255)
-  interacao               String             @map("tb_paciente_interacao") @db.VarChar(255)
-  fotoPerfil              Bytes              @map("tb_paciente_foto")
-  tb_paciente_fk_cuidador Int
-  tb_paciente_fk_remedio  Int?
-  tb_paciente_fk_alergia  Int?
-  tb_alergias             tb_alergias?       @relation(fields: [tb_paciente_fk_alergia], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_cuidadores           Cuidador           @relation(fields: [tb_paciente_fk_cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_remedios             tb_remedios?       @relation(fields: [tb_paciente_fk_remedio], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_pulseira_scan        tb_pulseira_scan[]
+  id               Int                @id @default(autoincrement())
+  cpf              String             @map("tb_paciente_cpf") @db.Char(11)
+  nome             String             @map("tb_paciente_nome") @db.VarChar(255)
+  dtNascimento     String             @map("tb_paciente_dt_nasc") @db.Char(8)
+  condicao         String             @map("tb_paciente_condicao") @db.VarChar(255)
+  responsavelLegal String             @map("tb_paciente_responsavel_legal") @db.VarChar(255)
+  tipoSanguineo    TipoSanguineo
+  temperamento     String             @map("tb_paciente_temperamento") @db.VarChar(255)
+  interacao        String             @map("tb_paciente_interacao") @db.VarChar(255)
+  fotoPerfil       Bytes              @map("tb_paciente_foto")
+  cuidador         Int                @map("tb_paciente_fk_cuidador")
+  remedio          Int?               @map("tb_paciente_fk_remedio")
+  alergia          Int?               @map("tb_paciente_fk_alergia")
+  tb_alergias      tb_alergias?       @relation(fields: [alergia], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_cuidadores    Cuidador           @relation(fields: [cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_remedios      Remedio?           @relation(fields: [remedio], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_pulseira_scan tb_pulseira_scan[]
 
   @@map("tb_pacientes")
 }
@@ -75,12 +75,14 @@ model tb_pulseira_scan {
   tb_pacientes                 Paciente @relation(fields: [tb_pulseira_scan_fk_paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model tb_remedios {
-  id              Int        @id @default(autoincrement())
-  tb_remedio_desc String     @db.VarChar(255)
-  tb_remedio_qtd  String     @db.VarChar(255)
-  tb_remedio_hora DateTime   @db.Time(6)
-  tb_pacientes    Paciente[]
+model Remedio {
+  id         Int        @id @default(autoincrement())
+  descricao  String     @map("tb_remedio_desc") @db.VarChar(255)
+  quantidade String     @map("tb_remedio_qtd") @db.VarChar(255)
+  hora       String     @map("tb_remedio_hora") @db.VarChar(10)
+  paciente   Paciente[]
+
+  @@map("tb_remedios")
 }
 
 enum Nivel {
