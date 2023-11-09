@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { CreatePacienteController } from "../modules/paciente/pacienteCase/createPaciente/createPacienteController";
 import { GetPacienteController } from "../modules/paciente/pacienteCase/getPacienteCase/getPacienteController";
+import { GetPatientsByCaretakerController } from './../modules/paciente/getPacienteByIDCuidadorCase/getPacienteByIDCuidadorController';
 import { Request, Response } from "express";
 const pacienteRoutes = Router();
 
 const createPaciente = new CreatePacienteController();
 const getPaciente = new GetPacienteController();
+const getPacienteID = new GetPatientsByCaretakerController();
 
 // Cadastro Paciente
 pacienteRoutes.post("/cad", createPaciente.handle, (req: Request, res: Response) => {
@@ -18,5 +20,9 @@ pacienteRoutes.post("/cad", createPaciente.handle, (req: Request, res: Response)
 
 // Listagem Paciente
 pacienteRoutes.get("/list", getPaciente.handle);
+
+//Listar paciente pelo id do cuidador
+pacienteRoutes.get("/caregiver/:caretakerId/patients", getPacienteID.handle);
+
 
 export { pacienteRoutes }
