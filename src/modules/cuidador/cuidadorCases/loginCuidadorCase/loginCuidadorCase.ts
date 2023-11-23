@@ -1,10 +1,10 @@
-// loginCuidadorCase.ts
 import { Cuidador } from "@prisma/client";
 import { prisma } from "../../../../prisma/client";
 import { AppError } from "../../../../errors/appError";
+import * as jwt from 'jsonwebtoken';
 
 export class LoginCuidadorCase {
-    async execute({ email, senha }: { email: string, senha: string }): Promise<Cuidador | null> {
+    async execute({ email, senha }: { email: string, senha: string }): Promise<{ cuidador: Cuidador, token: string }> {
         // Verificar se o usuário existe com o email fornecido
         const cuidador = await prisma.cuidador.findUnique({
             where: {
@@ -21,6 +21,9 @@ export class LoginCuidadorCase {
             throw new AppError("Incorrect password");
         }
 
-        return cuidador;
+        // Gerar token JWT
+        const token = jwt.sign({ cuidadorId: cuidador.id }, '@oblivioApp', { expiresIn: '1h' });
+
+        return { cuidador, token };
     }
 }
