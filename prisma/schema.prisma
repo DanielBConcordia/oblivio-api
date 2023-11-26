@@ -12,75 +12,79 @@ model SequelizeMeta {
   name String @id @db.VarChar(255)
 }
 
-model tb_alergias {
-  id              Int        @id @default(autoincrement())
-  tb_alergia_desc String?    @db.VarChar(255)
-  tb_pacientes    Paciente[]
+model Alergias {
+  id           Int       @id @default(autoincrement())
+  descricao    String?   @map("tb_alergia_desc") @db.VarChar(255)
+  paciente     Int?      @map("tb_alergia_fk_paciente")
+  tb_pacientes Paciente? @relation(fields: [paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("tb_alergias")
 }
 
 model Cuidador {
-  id               Int                @id @default(autoincrement())
-  cpf              String             @map("tb_cuidador_cpf") @db.Char(11)
-  dtNascimento     String             @map("tb_cuidador_dt_nasc") @db.Char(8)
-  email            String             @unique @map("tb_cuidador_email") @db.VarChar(255)
-  telefone         String             @unique @map("tb_cuidadr_tel") @db.Char(11)
-  telefoneReserva  String?            @unique @map("tb_cuidador_tel_res") @db.Char(11)
-  nomeSocial       String?            @map("tb_cuidador_nome_social") @db.VarChar(255)
-  nome             String             @map("tb_cuidador_nome") @db.VarChar(255)
-  senha            String             @map("tb_cuidador_senha") @db.VarChar(64)
-  fotoPerfil       Bytes?             @map("tb_cuidador_foto_perfil")
-  rua              String             @map("tb_cuidador_rua") @db.VarChar(255)
-  cep              String             @map("tb_cuidador_cep") @db.Char(8)
-  bairro           String             @map("tb_cuidador_bairro") @db.VarChar(255)
-  numeroCasa       String             @map("tb_cuidador_numero_casa") @db.VarChar(6)
-  cidade           String             @map("tb_cuidador_cidade") @db.VarChar(255)
-  uf               String             @map("tb_cuidador_uf") @db.Char(2)
-  complementoCasa  String?            @map("tb_cuidador_complemento") @db.VarChar(12)
-  pontoReferencia  String?            @map("tb_cuidador_ponto_referencia") @db.VarChar(255)
+  id               Int            @id @default(autoincrement())
+  cpf              String         @map("tb_cuidador_cpf") @db.Char(11)
+  dtNascimento     String         @map("tb_cuidador_dt_nasc") @db.Char(8)
+  email            String         @unique @map("tb_cuidador_email") @db.VarChar(255)
+  telefone         String         @unique @map("tb_cuidadr_tel") @db.Char(11)
+  telefoneReserva  String?        @unique @map("tb_cuidador_tel_res") @db.Char(11)
+  nomeSocial       String?        @map("tb_cuidador_nome_social") @db.VarChar(255)
+  nome             String         @map("tb_cuidador_nome") @db.VarChar(255)
+  senha            String         @map("tb_cuidador_senha") @db.VarChar(64)
+  fotoPerfil       Bytes?         @map("tb_cuidador_foto_perfil")
+  rua              String         @map("tb_cuidador_rua") @db.VarChar(255)
+  cep              String         @map("tb_cuidador_cep") @db.Char(8)
+  bairro           String         @map("tb_cuidador_bairro") @db.VarChar(255)
+  numeroCasa       String         @map("tb_cuidador_numero_casa") @db.VarChar(6)
+  cidade           String         @map("tb_cuidador_cidade") @db.VarChar(255)
+  uf               String         @map("tb_cuidador_uf") @db.Char(2)
+  complementoCasa  String?        @map("tb_cuidador_complemento") @db.VarChar(12)
+  pontoReferencia  String?        @map("tb_cuidador_ponto_referencia") @db.VarChar(255)
   nivel            Nivel?
   tb_pacientes     Paciente[]
-  tb_pulseira_scan tb_pulseira_scan[]
+  tb_pulseira_scan PulseiraScan[]
 
   @@map("tb_cuidadores")
 }
 
 model Paciente {
-  id               Int                @id @default(autoincrement())
-  cpf              String             @map("tb_paciente_cpf") @db.Char(11)
-  nome             String             @map("tb_paciente_nome") @db.VarChar(255)
-  dtNascimento     String             @map("tb_paciente_dt_nasc") @db.Char(8)
-  condicao         String             @map("tb_paciente_condicao") @db.VarChar(255)
-  responsavelLegal String             @map("tb_paciente_responsavel_legal") @db.VarChar(255)
+  id               Int            @id @default(autoincrement())
+  cpf              String         @map("tb_paciente_cpf") @db.Char(11)
+  nome             String         @map("tb_paciente_nome") @db.VarChar(255)
+  dtNascimento     String         @map("tb_paciente_dt_nasc") @db.Char(8)
+  condicao         String         @map("tb_paciente_condicao") @db.VarChar(255)
+  responsavelLegal String         @map("tb_paciente_responsavel_legal") @db.VarChar(255)
   tipoSanguineo    TipoSanguineo
-  temperamento     String             @map("tb_paciente_temperamento") @db.VarChar(255)
-  interacao        String             @map("tb_paciente_interacao") @db.VarChar(255)
-  fotoPerfil       Bytes              @map("tb_paciente_foto")
-  cuidador         Int                @map("tb_paciente_fk_cuidador")
-  remedio          Int?               @map("tb_paciente_fk_remedio")
-  alergia          Int?               @map("tb_paciente_fk_alergia")
-  tb_alergias      tb_alergias?       @relation(fields: [alergia], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_cuidadores    Cuidador           @relation(fields: [cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_remedios      Remedio?           @relation(fields: [remedio], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_pulseira_scan tb_pulseira_scan[]
+  temperamento     String         @map("tb_paciente_temperamento") @db.VarChar(255)
+  interacao        String         @map("tb_paciente_interacao") @db.VarChar(255)
+  fotoPerfil       Bytes          @map("tb_paciente_foto")
+  cuidador         Int            @map("tb_paciente_fk_cuidador")
+  tb_cuidadores    Cuidador       @relation(fields: [cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_pulseira_scan PulseiraScan[]
+  tb_alergia       Alergias[]
+  tb_remedio       Remedio[]
 
   @@map("tb_pacientes")
 }
 
-model tb_pulseira_scan {
-  id                           Int      @id @default(autoincrement())
-  tb_pulseira_scan_fk_cuidador Int
-  tb_pulseira_scan_fk_paciente Int
-  tb_pulseira_scan_local       String?  @db.VarChar(255)
-  tb_cuidadores                Cuidador @relation(fields: [tb_pulseira_scan_fk_cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tb_pacientes                 Paciente @relation(fields: [tb_pulseira_scan_fk_paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
+model PulseiraScan {
+  id            Int      @id @default(autoincrement())
+  cuidador      Int      @map("tb_pulseira_scan_fk_cuidador")
+  paciente      Int      @map("tb_pulseira_scan_fk_paciente")
+  local         String?  @map("tb_pulseira_scan_local") @db.VarChar(255)
+  tb_cuidadores Cuidador @relation(fields: [cuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_pacientes  Paciente @relation(fields: [paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("tb_pulseira_scan")
 }
 
 model Remedio {
-  id         Int        @id @default(autoincrement())
-  descricao  String     @map("tb_remedio_desc") @db.VarChar(255)
-  quantidade String     @map("tb_remedio_qtd") @db.VarChar(255)
-  hora       String     @map("tb_remedio_hora") @db.VarChar(10)
-  paciente   Paciente[]
+  id           Int       @id @default(autoincrement())
+  descricao    String    @map("tb_remedio_desc") @db.VarChar(255)
+  quantidade   String    @map("tb_remedio_qtd") @db.VarChar(255)
+  hora         String    @map("tb_remedio_hora") @db.VarChar(10)
+  paciente     Int?      @map("tb_remedio_fk_paciente")
+  tb_pacientes Paciente? @relation(fields: [paciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("tb_remedios")
 }

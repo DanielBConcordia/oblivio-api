@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../../prisma/client";
 import { Paciente } from "@prisma/client";
 
 export class GetPatientsByCaretakerCase {

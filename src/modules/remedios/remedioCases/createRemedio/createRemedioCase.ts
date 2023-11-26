@@ -7,7 +7,8 @@ export class CreateRemedioCase {
     async execute({
         descricao,
         quantidade,
-        hora
+        hora,
+        paciente
     }: CreateRemedioDTO): Promise<Remedio> {
         // Criar o remedio
 
@@ -15,7 +16,8 @@ export class CreateRemedioCase {
             data: {
                 descricao,
                 quantidade,
-                hora
+                hora,
+                paciente
             }
         });
 
