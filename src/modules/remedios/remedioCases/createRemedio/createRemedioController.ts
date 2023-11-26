@@ -6,7 +6,8 @@ export class CreateRemedioController {
         const {
             descricao,
             quantidade,
-            hora
+            hora,
+            paciente
         } =req.body;
 
         const createRemedioCase = new CreateRemedioCase();
@@ -14,7 +15,8 @@ export class CreateRemedioController {
         const result = await createRemedioCase.execute({
             descricao,
             quantidade,
-            hora
+            hora,
+            paciente
         });
 
         return res.status(201).json(result)
