@@ -3,6 +3,7 @@ import { CreateCuidadorController } from "../modules/cuidador/cuidadorCases/crea
 import { GetCuidadorController } from "../modules/cuidador/cuidadorCases/getCuidadorCase/getCuidadorController";
 import { LoginCuidadorController } from "../modules/cuidador/cuidadorCases/loginCuidadorCase/loginCuidadorController";
 import { DeleteCuidadorController } from "../modules/cuidador/cuidadorCases/deleteCuidadorCase/deleteCuidadorController";
+import { GetCuidadorByIdController } from "../modules/cuidador/cuidadorCases/getCuidadorByIdCase/getCuidadorByIdController";
 import { Request, Response } from "express";
 const cuidadorRoutes = Router();
 
@@ -10,6 +11,7 @@ const createCuidador = new CreateCuidadorController();
 const getCuidador = new GetCuidadorController();
 const loginCuidador = new LoginCuidadorController();
 const deleteCuidador = new DeleteCuidadorController();
+const getCuidadorById = new GetCuidadorByIdController();
 
 // Cadastro de cuidador
 cuidadorRoutes.post("/cad", createCuidador.handle, (req: Request, res: Response) => {
@@ -34,6 +36,9 @@ cuidadorRoutes.post("/login", loginCuidador.handle, (req: Request, res: Response
 
 //Deletar cuidador
 cuidadorRoutes.delete("/delete/:id", deleteCuidador.handle);
+
+// Listar cuidador pelo id
+cuidadorRoutes.get("/listId/:id", getCuidadorById.handle);
 
 
 export { cuidadorRoutes };
