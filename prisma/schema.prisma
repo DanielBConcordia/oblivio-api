@@ -12,6 +12,16 @@ model SequelizeMeta {
   name String @id @db.VarChar(255)
 }
 
+model CaregiverPac {
+  id            Int      @id @default(autoincrement())
+  idPaciente    Int      @map("tb_caregiverpac_fk_paciente")
+  idCuidador    Int      @map("tb_caregiverpac_fk_cuidador")
+  tb_pacientes  Paciente @relation(fields: [idPaciente], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tb_cuidadores Cuidador @relation(fields: [idCuidador], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("tb_caregiverpac")
+}
+
 model Alergias {
   id           Int       @id @default(autoincrement())
   descricao    String?   @map("tb_alergia_desc") @db.VarChar(255)
@@ -43,6 +53,7 @@ model Cuidador {
   nivel            Nivel?
   tb_pacientes     Paciente[]
   tb_pulseira_scan PulseiraScan[]
+  tb_caregiverpac  CaregiverPac[]
 
   @@map("tb_cuidadores")
 }
@@ -63,6 +74,7 @@ model Paciente {
   tb_pulseira_scan PulseiraScan[]
   tb_alergia       Alergias[]
   tb_remedio       Remedio[]
+  tb_caregiverpac  CaregiverPac[]
 
   @@map("tb_pacientes")
 }
