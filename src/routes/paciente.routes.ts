@@ -4,6 +4,7 @@ import { GetPacienteController } from "../modules/paciente/pacienteCase/getPacie
 import { GetPatientsByCaretakerController } from '../modules/paciente/pacienteCase/getPacienteByIDCuidadorCase/getPacienteByIDCuidadorController';
 import { LoginPacienteController } from "../modules/paciente/pacienteCase/loginPacienteCase/loginPacienteController";
 import { DeletePacienteController } from "../modules/paciente/deletePacienteCase/deletePacienteController";
+import { GetPacienteByIdController } from "../modules/paciente/pacienteCase/getPacienteByIdCase/getPacienteByIdController";
 
 import { Request, Response } from "express";
 const pacienteRoutes = Router();
@@ -13,6 +14,7 @@ const getPaciente = new GetPacienteController();
 const getPacienteID = new GetPatientsByCaretakerController();
 const LoginPaciente = new LoginPacienteController();
 const delePaciente = new DeletePacienteController();
+const getPacientById = new GetPacienteByIdController();
 
 // Cadastro Paciente
 pacienteRoutes.post("/cad", createPaciente.handle, (req: Request, res: Response) => {
@@ -39,9 +41,9 @@ pacienteRoutes.post("/login", LoginPaciente.handle, (req: Request, res: Response
 });
 
 //Deletar paciente
-
 pacienteRoutes.delete("/delete/:id", delePaciente.handle);
 
-
+//Listar paciente pelo id
+pacienteRoutes.get('/listId/:id', getPacientById.handle);
 
 export { pacienteRoutes }
