@@ -33,8 +33,8 @@ model Alergias {
 
 model Cuidador {
   id               Int            @id @default(autoincrement())
-  cpf              String         @map("tb_cuidador_cpf") @db.Char(11)
-  dtNascimento     String         @map("tb_cuidador_dt_nasc") @db.Char(8)
+  cpf              String         @map("tb_cuidador_cpf") @db.Char(14)
+  dtNascimento     String         @map("tb_cuidador_dt_nasc") @db.Char(10)
   email            String         @unique @map("tb_cuidador_email") @db.VarChar(255)
   telefone         String         @unique @map("tb_cuidadr_tel") @db.Char(11)
   telefoneReserva  String?        @unique @map("tb_cuidador_tel_res") @db.Char(11)
@@ -60,9 +60,9 @@ model Cuidador {
 
 model Paciente {
   id               Int            @id @default(autoincrement())
-  cpf              String         @map("tb_paciente_cpf") @db.Char(11)
+  cpf              String         @map("tb_paciente_cpf") @db.Char(14)
   nome             String         @map("tb_paciente_nome") @db.VarChar(255)
-  dtNascimento     String         @map("tb_paciente_dt_nasc") @db.Char(8)
+  dtNascimento     String         @map("tb_paciente_dt_nasc") @db.Char(10)
   condicao         String         @map("tb_paciente_condicao") @db.VarChar(255)
   responsavelLegal String         @map("tb_paciente_responsavel_legal") @db.VarChar(255)
   tipoSanguineo    TipoSanguineo
